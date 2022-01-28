@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Proof of Concept</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.min.css" integrity="sha512-B0mpFwHOmRf8OK4U2MBOhv9W1nbPw/i3W1nBERvMZaTWd3+j+blGbOyv3w1vJgcy3cYhzwgw1ny+TzWICN35Xg==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- flickity gestione slider-->
+  <link rel="apple-touch-icon" sizes="57x57" href="assets/logo/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="assets/logo/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="assets/logo/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/logo/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="assets/logo/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/logo/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="assets/logo/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="assets/logo/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="assets/logo/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="assets/logo/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/favicon-16x16.png">
+  <link rel="manifest" href="assets/logo/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="assets/logo/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <script src="https://d3js.org/d3.v4.js"></script>
+</head>
+<body>
+  <!-- ------------------INIZIO HEADER------------------ -->
+  <div class="header">
+    <div class="logo">
+      <img src="assets/logo.png" alt="">
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="ins_csv.html">Inserisci CSV</a></li>
+    </ul>
+    <div class="cta">
+      <a href="" class="button">Contatti</a>
+    </div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <!-- ------------------FINE HEADER------------------ -->
+  <!-- ------------------INZIO HERO------------------ -->
+  <div class="hero hero_csv">
+    <div class="hero__content">
+      <h1 class="big-text">Risultato dell'elaborazione</h1>
+    </div>
+  </div>
+  <!-- ------------------FINE HERO------------------ -->
+  <!-- ------------------INIZIO GRAFICO------------------ -->
+  <div id="my_dataviz"></div>
+  <!-- ------------------FINE GRAFICO------------------ -->
+  <!-- ------------------INIZIO FOOTER------------------ -->
+  <footer class="footer mt-3">
+    <div class="grid">
+      <div class="col">
+        <div class="logo logo__footer">
+          <img src="assets/logo.png" alt="">
+        </div>
+      </div>
+      <div class="col">
+        <h4 class="tw">P.IVA</h4>
+        <p class="tw">05006900962</p>
+      </div>
+      <div class="col">
+        <h4 class="tw">Sede</h4>
+        <p class="tw">Via Solferino, 1, 26900 Lodi LO</p>
+      </div>
+      <div class="col">
+        <h4 class="tw">PEC</h4>
+        <p class="tw">zucchettispa@gruppozucchetti.it</p>
+      </div>
+    </div>
+  </footer>
+  <!-- ------------------FINE FOOTER------------------ -->
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" integrity="sha512-+m9auGg9ZwnDc37W8RSsLhzKBLVOYsf5BKzSpYrYhQQk6hItXOhBFKHuHbMCpoABCUO6l4HVK+dFwxMIME3E7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- flickity gestione slider-->
+  <script type="text/javascript">
+    $( document ).ready(function() {
+      $( ".hamburger" ).on('click', function() {
+        $(".menu").toggleClass("menu--open");
+      });
+    });
+
+    //D3 scattern Plot
+    var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 600 - margin.left - margin.right,
+    height = 450 - margin.top - margin.bottom;
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+    "translate(" + margin.left + "," + margin.top + ")");
+
+    //Read the data
+    d3.csv("csv/eng.csv", function(data) {
+
+      console.log(data);
+      // Add X axis
+      var x = d3.scaleLinear()
+      .domain([ 0,  38])
+      .range([ 0, width ]);
+      svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+      // Add Y axis
+      var y = d3.scaleLinear()
+      .domain([0, 19])
+      .range([ height, 0]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+
+      //Add X-Label
+      svg.append("text").attr("class", "x label").attr("text-anchor", "end").attr("x", width).attr("y", height -6).text("partite totali vinte");
+
+      //Add y-label
+      svg.append("text").attr("class", "y label").attr("text-anchor", "end").attr("y", 6).attr("dy", ".75em").attr("transform", "rotate(-90)").text("partite totali vinte in casa");
+
+      // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
+      // Its opacity is set to 0: we don't see it by default.
+      var tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+
+
+
+      // A function that change this tooltip when the user hover a point.
+      // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
+      var mouseover = function(d) {
+        tooltip
+        .style("opacity", 1)
+        .html(d.team_name + "<br>wins: " + d.wins + "<br>wins home: " + d.wins_home)
+        .style("left", (d3.event.pageX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+        .style("top", (d3.event.pageY - 28) + "px")
+      }
+
+      var mousemove = function(d) {
+        tooltip
+        .html(d.team_name + "<br>wins: " + d.wins + "<br>wins home: " + d.wins_home)
+        .style("left", (d3.event.pageX) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+        .style("top", (d3.event.pageY - 28) + "px")
+      }
+
+      // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
+      var mouseleave = function(d) {
+        tooltip
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+      }
+
+      // Add dots
+      svg.append('g')
+      .selectAll("dot")
+      .data(data)//.filter(function(d,i){return i<50})) // the .filter part is just to keep a few dots on the chart, not all of them
+      .enter()
+      .append("circle")
+      .attr("cx", function (d) { return x(d.wins); } )
+      .attr("cy", function (d) { return y(d.wins_home); } )
+      .attr("r", 7)
+      .style("fill", function(d){if (d.team_name == "Manchester City FC") return "#FF0000"; return"#69b3a2";})//#69b3a2
+      .style("opacity", 0.3)
+      .style("stroke", "white")
+      .on("mouseover", mouseover )
+      //.on("mousemove", mousemove )
+      .on("mouseleave", mouseleave )
+
+    })
+  </script>
+
+</body>
+</html>

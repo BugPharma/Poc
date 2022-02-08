@@ -42,7 +42,7 @@
       <a href="" class="button">Contatti</a>
     </div>
     <div class="hamburger">
-      <span></span><span></span><span></span>
+      <span></span><span></span><span></span><!-- icona mobiel, gli spine le lineette-->
     </div>
   </div>
   <!-- ------------------FINE HEADER------------------ -->
@@ -53,6 +53,9 @@
       <h1 class="big-text">Login warrior</h1>
       <a href="#scopri" class="button plr-1">Scopri</a>
     </div>
+    <!--<video autoplay muted loop id="my-video">
+      <source src="assets/v2.mp4" type="video/mp4">
+    </video> -->
   </div>
   <!-- ------------------FINE HERO------------------ -->
   <!-- ------------------INZIO POSTER------------------ -->
@@ -99,7 +102,7 @@
   </div>
   <!-- ------------------FINE GRID------------------ -->
   <!-- ------------------INIZIO CAROSELLO------------------ -->
-  <div class="main-carousel" data-flickity='{ "cellAlign": "center", "contain": true }'>
+  <div class="main-carousel" data-flickity='{ "cellAlign": "center", "contain": true }'><!--INIZIALIZZATO CON HTML-->
     <a href="https://it.wikipedia.org/wiki/Grafico_di_dispersione" target="_blank"><div class="carousel-cell scattern">Scattern Plot</div></a>
     <a href="https://it.wikipedia.org/wiki/Coordinate_parallele" target="_blank"><div class="carousel-cell parallel">Parallel coordinates</div></a>
     <a href="https://en.wikipedia.org/wiki/Force-directed_graph_drawing" target="_blank"><div class="carousel-cell fdg">Force-directed graph</div></a>
@@ -131,7 +134,16 @@
   <!-- ------------------FINE FOOTER------------------ -->
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" integrity="sha512-+m9auGg9ZwnDc37W8RSsLhzKBLVOYsf5BKzSpYrYhQQk6hItXOhBFKHuHbMCpoABCUO6l4HVK+dFwxMIME3E7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="text/javascript" src="js/control.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" integrity="sha512-+m9auGg9ZwnDc37W8RSsLhzKBLVOYsf5BKzSpYrYhQQk6hItXOhBFKHuHbMCpoABCUO6l4HVK+dFwxMIME3E7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- flickity gestione slider-->
+  <script type="text/javascript">
+    $( document ).ready(function() {//document ready indica di eseguire questo codice quando la pag. è caricata
+      //quando premo la classe hamburger aggiunge classea open per aprirlo
+      /* Open Panel */
+      $( ".hamburger" ).on('click', function() {
+        $(".menu").toggleClass("menu--open");
+      });
+    });
+  </script>
+
 </body>
 </html>

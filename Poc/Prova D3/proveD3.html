@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Proof of Concept</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -27,13 +27,13 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="assets/logo/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
-  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script><!-- D3.js -->
 </head>
 <body>
   <!-- ------------------INIZIO HEADER------------------ -->
   <div class="header">
     <div class="logo">
-      <img src="assets/logo.png" alt="">
+      <img src="../assets/logo.png" alt="">
     </div>
     <ul class="menu">
       <li><a href="index.html">Home</a></li>
@@ -43,7 +43,7 @@
       <a href="" class="button">Contatti</a>
     </div>
     <div class="hamburger">
-      <span></span><span></span><span></span>
+      <span></span><span></span><span></span><!-- icona mobiel, gli spine le lineette-->
     </div>
   </div>
   <!-- ------------------FINE HEADER------------------ -->
@@ -52,6 +52,9 @@
     <div class="hero__content">
       <h1 class="big-text">Risultato dell'elaborazione</h1>
     </div>
+    <!--<video autoplay muted loop id="my-video">
+      <source src="assets/v2.mp4" type="video/mp4">
+    </video> -->
   </div>
   <!-- ------------------FINE HERO------------------ -->
   <!-- ------------------INIZIO GRAFICO------------------ -->
@@ -84,7 +87,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js" integrity="sha512-+m9auGg9ZwnDc37W8RSsLhzKBLVOYsf5BKzSpYrYhQQk6hItXOhBFKHuHbMCpoABCUO6l4HVK+dFwxMIME3E7Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- flickity gestione slider-->
   <script type="text/javascript">
-    $( document ).ready(function() {
+    $( document ).ready(function() {//document ready indica di eseguire questo codice quando la pag. è caricata
+      //quando premo la classe hamburger aggiunge classea open per aprirlo
+      /* Open Panel */
       $( ".hamburger" ).on('click', function() {
         $(".menu").toggleClass("menu--open");
       });
@@ -105,7 +110,7 @@
     "translate(" + margin.left + "," + margin.top + ")");
 
     //Read the data
-    d3.csv("csv/eng.csv", function(data) {
+    d3.csv("../csv/eng.csv", function(data) {
 
       console.log(data);
       // Add X axis

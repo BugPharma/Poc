@@ -4,7 +4,7 @@ import logo from './Res/logo.png';
 class Footer extends Component {
     render() {
         return (
-            <footer className="footer mt-3" id="footer">
+            <footer className="footer mt-1" id="footer">
                 <div className="grid">
                 <div className="col">
                     <div className="logo logo__footer">

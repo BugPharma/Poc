@@ -161,7 +161,7 @@ header{
 
 /* ------------------INIZIO FORM------------------ */
 .box{
-	height: 45vh;
+	height: auto;
 	padding: 150px 0;
 }
 .form{

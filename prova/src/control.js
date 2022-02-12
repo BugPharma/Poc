@@ -263,8 +263,8 @@ function d3Construct(data, nameX, nameY){
 
 
   const margin = {top: 10, right: 30, bottom: 30, left: 60},
-  width = 460 - margin.left - margin.right,
-  height = 400 - margin.top - margin.bottom;
+  width = 660 - margin.left - margin.right,
+  height = 600 - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg = d3.select("#my_dataviz")
@@ -281,16 +281,18 @@ function d3Construct(data, nameX, nameY){
 
     // Add X axis
     const x = d3.scaleLinear()
-    .domain([min(data, nameX), max(data, nameX)])
+    .domain([min(data, nameX) , max(data, nameX)])
     .range([ 0, width ]);
+
     svg.append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x));
 
     // Add Y axis
     const y = d3.scaleLinear()
-    .domain([min(data, nameY), max(data, nameY)])
+    .domain([min(data, nameY) , max(data, nameY) ])
     .range([ height, 0]);
+
     svg.append("g")
     .call(d3.axisLeft(y));
 
@@ -301,7 +303,7 @@ function d3Construct(data, nameX, nameY){
     .join("circle")
     .attr("cx", function (d) { return x(d[nameX]); } )
     .attr("cy", function (d) { return y(d[nameY]); } )
-    .attr("r", 3.5)
-    .style("fill", "#69b3a2");
+    .attr("r", 4.5)
+    .style("fill", "#2879eb");
   }
 }

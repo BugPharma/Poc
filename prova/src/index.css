@@ -132,7 +132,7 @@ header{
 /* ------------------INIZIO POSTER------------------ */
 .poster{
   display: flex;
-  height: 100vh;
+  height: auto;
   /*border: 1px solid red;*/
   width: 100%;
   align-items: center;
@@ -147,10 +147,36 @@ header{
 
 /* ------------------FINE POSTER------------------ */
 
+/* ------------------INIZIO BGCOVER------------------ */
+.bg--cover{
+  /*border: 1px solid red;*/
+  display: flex;
+  padding: 100px 0;
+  background: linear-gradient(0deg, rgba(0,0,0,.8), rgba(0,0,0,0.3) 70.71%),
+  url("./Res/data3.jpg") no-repeat center center;/*con linear ingredient doppio background*/
+  background-size: cover;
+  height: auto;
+}
+.bg--cover__title{
+  width: 50%; 
+  padding: 50px;
+  display: flex;
+  align-items: center;
+}/*gli ultimi due comandi per allinearlo al centro verticalmente*/
+
+.bg--cover__text{
+  height: auto;
+  width: 50%;
+  padding: 30px;}
+/* ------------------FINE BGCOVER------------------ */
+
 /* ------------------INIZIO GRID------------------ */
 
 .grid {
-  display: flex;max-width: 1350px;padding: 0 30px;margin: 0 auto;
+  display: flex;
+  max-width: 1350px;
+  padding: 0 30px;
+  margin: 0 auto;
 }
 .grid .col {
   width: 100%;
@@ -271,6 +297,16 @@ div.bottone{
 }
 
 /* ------------------FINE FOOTER------------------ */
+
+/* ------------------INZIO D3------------------ */
+
+#my_dataviz{
+	height: auto;
+	overflow-x: hidden;
+	padding: 20px 0px;
+}
+
+/* ------------------FINE D3------------------ */
 
 /* ------------------INZIO HELPERS------------------ */
 .mt-1{margin-top: 50px;}

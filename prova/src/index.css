@@ -282,7 +282,7 @@ form .input-box span.details{
    margin: 35px 0
  }
 
-div.bottone{
+div .bottone{
 	margin: 15px auto;
 	height: 30px;
 	margin-top: 25px;
@@ -292,6 +292,7 @@ div.bottone{
 
 /* ------------------INIZIO FOOTER------------------ */
 .footer{
+  clear:both;
   background: #010e30;
   padding: 160px 0;
 }
@@ -302,10 +303,47 @@ div.bottone{
 
 #my_dataviz{
 	height: auto;
+  width: max-content;
+  float: left;
 	overflow-x: hidden;
 	padding: 20px 0px;
+  margin-left: 1cm;
 }
 
+#personalizzazione{
+  display: none;
+  float: left;
+  width: max-content;
+  margin: 2cm;
+  margin-left: 3cm;
+}
+
+#colorPicker{
+  width: max-content;
+}
+
+/* #personalizzazione button{
+  margin-left: 0.8em;
+} */
+
+/* #personalizzazione .button-blue {
+  background: #316bff;
+  color: #fff;
+}
+
+#personalizzazione .button-green {
+  background: #0cb84e;
+  color: #fff;
+} */
+
+#personalizzazione div {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+div #opacityPicker {
+  padding-top: 0;
+}
 /* ------------------FINE D3------------------ */
 
 /* ------------------INZIO HELPERS------------------ */

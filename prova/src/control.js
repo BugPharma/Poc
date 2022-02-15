@@ -1,7 +1,9 @@
 import * as d3 from 'd3';
 import * as druid from '@saehrimnir/druidjs';
+import { sliderBottom } from 'd3-simple-slider';
 
 let checkbox = [];
+
 
 export function csvToArray(str, delimiter = ","){
   let array = [];
@@ -259,7 +261,9 @@ function d3Construct(data, nameX, nameY){
   console.log("y", nameY);
   
   document.querySelector("#contenitoreForm").style.display = "none";
-  document.querySelector("#my_dataviz").style.display = "block";
+  document.querySelector("#my_dataviz").style.display = "inline-block";
+  document.querySelector("#personalizzazione").style.display = "inline-block"; 
+
 
 
   const margin = {top: 10, right: 30, bottom: 30, left: 60},
@@ -288,6 +292,8 @@ function d3Construct(data, nameX, nameY){
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x));
 
+    console.log(svg);
+
     // Add Y axis
     const y = d3.scaleLinear()
     .domain([min(data, nameY) , max(data, nameY) ])
@@ -304,6 +310,100 @@ function d3Construct(data, nameX, nameY){
     .attr("cx", function (d) { return x(d[nameX]); } )
     .attr("cy", function (d) { return y(d[nameY]); } )
     .attr("r", 4.5)
-    .style("fill", "#2879eb");
+    .style("fill", "#316bff");
+
+
+    //Color picker
+    var num2hex = rgb => {
+      return rgb
+        .map(color => {
+          let str = color.toString(16);
+
+          if (str.length === 1) {
+            str = '0' + str;
+          }
+
+          return str;
+        })
+        .join('');
+    };
+
+    var rgb = [49, 107, 255];
+    var colors = ['red', 'green', 'blue'];
+
+    var gColorPicker = d3
+      .select('#colorPicker')
+      .append('svg')
+      .attr('width', 550)
+      .attr('height', 250)
+      .append('g')
+      .attr('transform', 'translate(30,30)');
+
+    var box = gColorPicker
+      .append('rect')
+      .attr('width', 100)
+      .attr('height', 100)
+      .attr('transform', 'translate(400,0)')
+      .attr('fill', `#${num2hex(rgb)}`);
+
+      
+    rgb.forEach((color, i) => {
+      
+      var slider = sliderBottom()
+        .min(0)
+        .max(255)
+        .step(1)
+        .width(300)
+        .default(rgb[i])
+        .displayValue(false)
+        .fill(colors[i])
+        .on('onchange', num => {
+          rgb[i] = num;
+          box.attr('fill', `#${num2hex(rgb)}`);
+          d3.selectAll("circle")
+          .transition()
+          .duration(500)
+          .style("fill", `#${num2hex(rgb)}`);
+        });
+
+      gColorPicker
+        .append('g')
+        .attr('transform', `translate(30,${60 * i})`)
+        .call(slider);
+    });
+
+    //Opacity
+    var opacityPicker = d3
+      .select('#opacityPicker')
+      .append('svg')
+      .attr('width', 400)
+      .append('g')
+      .attr('transform', 'translate(30,30)');
+    
+      
+    var opSlider = sliderBottom()
+    .min(0)
+    .max(1)
+    .step(0.01)
+    .width(300)
+    .tickFormat(d3.format('.0%'))
+    .default(1)
+    .on('onchange', num => {
+      d3.selectAll("circle")
+          .transition()
+          .duration(500)
+          .style("opacity", num);
+      });
+
+
+    opacityPicker
+      .append('g')
+      .attr('transform', 'translate(30,30)')
+      .call(opSlider);
+  
   }
+
+
 }
+
+
